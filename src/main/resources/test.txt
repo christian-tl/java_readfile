@@ -1,0 +1,92 @@
+------------------spring application-context.xml基本配置---------------------
+
+<?xml version="1.0" encoding="UTF-8"?>
+<beans xmlns="http://www.springframework.org/schema/beans"
+    xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+    xmlns:context="http://www.springframework.org/schema/context" 
+    xmlns:aop="http://www.springframework.org/schema/aop" 
+    xsi:schemaLocation="http://www.springframework.org/schema/beans 
+                        http://www.springframework.org/schema/beans/spring-beans.xsd 
+                        http://www.springframework.org/schema/context 
+                        http://www.springframework.org/schema/context/spring-context.xsd 
+                        http://www.springframework.org/schema/aop 
+                        http://www.springframework.org/schema/aop/spring-aop.xsd 
+                        ">
+    <context:component-scan base-package="com.dangdang.ddframe,${system.autoscan.base.package}" />
+    <context:property-placeholder location="classpath*:META-INF/dd-frame/prop/internal/*.properties, classpath*:conf/*.properties,classpath*:conf/${system.profile.name}/*.properties" ignore-unresolvable="true"/>
+    <aop:aspectj-autoproxy />
+    <context:mbean-export registration="ignoreExisting" />
+    <import resource="classpath*:META-INF/dd-frame/spring/internal/*.xml" />
+    <import resource="classpath*:META-INF/dd-frame/spring/*.xml" />
+</beans>
+
+---------------------------------------
+<context:annotation-config> 使用注解装配
+<context:component-scan>    spring自动检测Bean
+用 <context:component-scan>  就不需要 <context:annotation-config> 了，一般都用 <context:component-scan>
+
+
+
+加在类上的注解,标示被sprint管理的类
+概念上的划分，而不是实现上的划分。
+@Component, org.springframework.stereotype.Component    通用
+@Controller, org.springframework.stereotype.Controller  控制器
+@Service, org.springframework.stereotype.Service     服务
+@Repository, org.springframework.stereotype.Repository  数据访问
+
+| Annotation | Meaning                                             |
++------------+-----------------------------------------------------+
+| @Component | generic stereotype for any Spring-managed component |
+| @Repository| stereotype for persistence layer                    |
+| @Service   | stereotype for service layer                        |
+| @Controller| stereotype for presentation layer (spring-mvc)      |
+
+
+@Transactional, org.springframework.transaction.annotation.Transactional
+
+
+关于自动装配的注解配置，DI/IOC
+
+JSR-250规范
+@Resource, javax.annotation.Resource
+
+Spring自带
+@Autowired, org.springframework.beans.factory.annotation.Autowired
+@Qualifier, org.springframework.beans.factory.annotation.Qualifier
+@Value, org.springframework.beans.factory.annotation.Value 
+
+JSR-330规范
+@Inject, javax.inject.Inject;
+@Named, javax.inject.Named;
+
+Resource和Autowired的区别？
+
+@Resource(name="sqliteCarDao") 
+等价于 
+@Inject
+@Named("sqliteCarDao")
+等价于 
+@Autowired
+@Qualifier("sqliteCarDao")
+
+上面的配置都可以装配下面修饰的类：
+@Component("sqliteCarDao")
+@Controller("sqliteCarDao")
+@Service("sqliteCarDao")
+@Repository("sqliteCarDao")
+或者由
+@Named("sqliteCarDao")
+@Qualifier("sqliteCarDao")
+修饰的类
+
+但是@Resource(name="sqliteCarDao") 并不能识别@Qualifier("sqliteCarDao")修饰的类。这个要特别注意。
+
+JSR-250规范,JDK自带，在rt.jar中，无需依赖第三方
+
+JSR-330规范，需要maven 第三方dependency
+<dependency>
+   <groupId>javax.inject</groupId>
+   <artifactId>javax.inject</artifactId>
+   <version>1</version>
+</dependency>
+

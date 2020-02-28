@@ -35,6 +35,9 @@ import java.util.stream.Stream;
  * 3.Using Java Scanner
  * 4.Streaming File Using Apache Commons IO : IOUtils.lineIterator , FileUtils.lineIterator .
  *
+ * 经测试，读取性能 ： readFileUsingBufferReader = readLineByLine = readFileByApacheIO = readFileByApacheFileUtils  > readFileUsingScanner
+ * 读取1.2Gtxt文件时间是34秒，其余方法都是OutOfMemoryError
+ *
  */
 public class ReadFile {
 

@@ -35,6 +35,13 @@ public class App {
     }
 
     static void work() throws IOException {
-        ReadFile.readFileUsingBufferReader();
+        ReadFile.readFileUsingBufferReader();//======34864
+//        ReadFile.readFileUsingScanner();//======110266
+//        ReadFile.readUTF8FileData();//======34174
+//        ReadFile.readFileReadAllBytes();//======OutOfMemoryError
+//        ReadFile.readFileBufferReader();//======OutOfMemoryError
+//        ReadFile.readLineByLine();//======34731
+//        ReadFile.readFileByApacheIO();//======34540
+//        ReadFile.readFileByApacheFileUtils();//======35194
     }
 }

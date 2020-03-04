@@ -16,7 +16,8 @@ import java.util.Scanner;
 import java.util.stream.Stream;
 
 /**
- * In this example, We will cover as the different option to read a file with Java. We will explore following options to read a file.
+ * 在这个例子中, 我们将会覆盖到据大部分Java读取文件的方法.
+ * 主要有下面这几类:
  *
  * 1.BufferReader.
  * 2.FileChannel
@@ -24,10 +25,6 @@ import java.util.stream.Stream;
  * 4.Scanner
  * 5.StreamTokenizer
  *
- * we see the different option to read a file.
- * We have the option to use BufferedReader to read line by line or use a scanner to read a file with Java.
- * We also look at the new API with Java 7 which provides a more powerful and clean approach to read a file.
- * In the end of this example, we discussed how to use the new Stream API to read a file in Java 8.
  *
  * 可以读取大文件的方法有：
  * 1.Using Java BufferedReader
@@ -36,7 +33,7 @@ import java.util.stream.Stream;
  * 4.Streaming File Using Apache Commons IO : IOUtils.lineIterator , FileUtils.lineIterator .
  *
  * 经测试，读取性能 ： readFileUsingBufferReader = readLineByLine = readFileByApacheIO = readFileByApacheFileUtils  > readFileUsingScanner
- * 读取1.2Gtxt文件时间是34秒，其余方法都是OutOfMemoryError
+ * 读取1.2G txt文件时间是34秒，其余方法都是OutOfMemoryError
  *
  */
 public class ReadFile {

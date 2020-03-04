@@ -11,7 +11,7 @@ import java.util.stream.Stream;
 
 public class ReadFile2 {
 
-    static String filePath = "/Users/christian/work/tmp/lbs_poi_to_poi.txt";
+    static String filePath = "src/main/resources/test.txt";
 
     public static void read1() {
 
